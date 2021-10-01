@@ -10,7 +10,10 @@
 //       });
 // }
 
-const result = document.getElementById('result');
+const number = document.getElementById('number');
+const name = document.getElementById('name');
+const height = document.getElementById('height');
+const weight = document.getElementById('weight');
 const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
@@ -20,8 +23,12 @@ async function searchPokeAPI(event) {
   const pokeUrl = baseUrl + userSearch.value + "/";
   const data = await fetch(pokeUrl);
   const json = await data.json();
-  result.innerHTML = json.name;
-  console.log(json.name);
+  document.getElementById("number").innerText = json.id;
+  document.getElementById("name").innerHTML = json.name;
+  document.getElementById("height").innerHTML = json.height +"m";
+  document.getElementById("weight").innerHTML = json.weight +"kg";
+
+  //console.log(json.name);
 }
 
 form.addEventListener('submit', searchPokeAPI);
