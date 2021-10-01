@@ -15,7 +15,7 @@ const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let pokeNum = 0;
-
+//test
 async function searchPokeAPI(event) {
   event.preventDefault();
   const pokeUrl = baseUrl + userSearch.value + "/";
