@@ -26,6 +26,7 @@ async function searchPokeAPI(event) {
   const data = await fetch(pokeUrl);
   const json = await data.json();
 
+  pokeNum = json.id;
   document.getElementById("number").innerText = json.id;
   document.getElementById("name").innerHTML = json.name;
   document.getElementById("height").innerHTML = json.height +"m";
@@ -50,7 +51,11 @@ async function scrollUp(event) {
     const pokeUrl = baseUrl + (pokeNum) + "/";
     const data = await fetch(pokeUrl);
     const json = await data.json();
-    result.innerHTML = json.name;
+    document.getElementById("number").innerText = json.id;
+    document.getElementById("name").innerHTML = json.name;
+    document.getElementById("height").innerHTML = json.height +"m";
+    document.getElementById("weight").innerHTML = json.weight +"kg";
+
     console.log(json.name);
   }
   document.getElementById("up").addEventListener("click", scrollUp);
@@ -64,7 +69,11 @@ async function scrollUp(event) {
     const pokeUrl = baseUrl + (pokeNum) + "/";
     const data = await fetch(pokeUrl);
     const json = await data.json();
-    result.innerHTML = json.name;
+    document.getElementById("number").innerText = json.id;
+    document.getElementById("name").innerHTML = json.name;
+    document.getElementById("height").innerHTML = json.height +"m";
+    document.getElementById("weight").innerHTML = json.weight +"kg";
+
     console.log(json.name);
   }
   document.getElementById("down").addEventListener("click", scrollDown);
