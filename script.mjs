@@ -10,29 +10,51 @@
 //       });
 // }
 
+
+/***********************************
+VARIABLES OF INFORMATION
+***********************************/
+
 const number = document.getElementById('number');
 const name = document.getElementById('name');
 const height = document.getElementById('height');
 const weight = document.getElementById('weight');
 const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
+const result = document.getElementById('result');
+const image = document.getElementById("pokeImage");
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let pokeNum = 0;
 
-async function searchPokeAPI(event) {
-  event.preventDefault();
-  const pokeUrl = baseUrl + userSearch.value + "/";
-  try {
+
+/***********************************
+UPDATING ALL INFO FUNCTION
+***********************************/
+
+async function updateInfo(event, pokeUrl) {
   const data = await fetch(pokeUrl);
   const json = await data.json();
 
   pokeNum = json.id;
-  document.getElementById("number").innerText = json.id;
-  document.getElementById("name").innerHTML = json.name;
-  document.getElementById("height").innerHTML = json.height +"m";
-  document.getElementById("weight").innerHTML = json.weight +"kg";
+  result.innerHTML = json.name;
+  number.innerText = json.id;
+  name.innerHTML = json.name;
+  height.innerHTML = json.height +"m";
+  weight.innerHTML = json.weight +"kg";
+  image.src = json.sprites.front_default;
 
   console.log(json.name);
+}
+
+
+/***********************************
+SEARCH
+***********************************/
+async function searchPokeAPI(event) {
+  event.preventDefault();
+  const pokeUrl = baseUrl + userSearch.value + "/";
+  try {
+    updateInfo(event, pokeUrl)
   } catch (err) {
     result.innerHTML = "DOES NOT EXIST";
     userSearch.value = "NO TYPE";
@@ -42,6 +64,11 @@ async function searchPokeAPI(event) {
 }
 form.addEventListener('submit', searchPokeAPI);
 
+
+
+/***********************************
+SCROLL UP & DOWN
+***********************************/
 async function scrollUp(event) {
     event.preventDefault();
     pokeNum += 1;
@@ -49,14 +76,7 @@ async function scrollUp(event) {
         pokeNum = 151;
     }
     const pokeUrl = baseUrl + (pokeNum) + "/";
-    const data = await fetch(pokeUrl);
-    const json = await data.json();
-    document.getElementById("number").innerText = json.id;
-    document.getElementById("name").innerHTML = json.name;
-    document.getElementById("height").innerHTML = json.height +"m";
-    document.getElementById("weight").innerHTML = json.weight +"kg";
-
-    console.log(json.name);
+    updateInfo(event, pokeUrl);
   }
   document.getElementById("up").addEventListener("click", scrollUp);
 
@@ -67,13 +87,7 @@ async function scrollUp(event) {
         pokeNum = 1;
     }
     const pokeUrl = baseUrl + (pokeNum) + "/";
-    const data = await fetch(pokeUrl);
-    const json = await data.json();
-    document.getElementById("number").innerText = json.id;
-    document.getElementById("name").innerHTML = json.name;
-    document.getElementById("height").innerHTML = json.height +"m";
-    document.getElementById("weight").innerHTML = json.weight +"kg";
-
-    console.log(json.name);
+    updateInfo(event, pokeUrl);
+  
   }
   document.getElementById("down").addEventListener("click", scrollDown);
