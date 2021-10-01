@@ -14,6 +14,7 @@ const result = document.getElementById('result');
 const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
+let pokeNum = 0;
 
 async function searchPokeAPI(event) {
   event.preventDefault();
@@ -22,6 +23,7 @@ async function searchPokeAPI(event) {
   const data = await fetch(pokeUrl);
   const json = await data.json();
   result.innerHTML = json.name;
+  pokeNum = json.id;
   console.log(json.name);
   } catch (err) {
     result.innerHTML = "DOES NOT EXIST";
@@ -30,5 +32,32 @@ async function searchPokeAPI(event) {
   }
   
 }
-
 form.addEventListener('submit', searchPokeAPI);
+
+async function scrollUp(event) {
+    event.preventDefault();
+    pokeNum += 1;
+    if (pokeNum > 151) {
+        pokeNum = 151;
+    }
+    const pokeUrl = baseUrl + (pokeNum) + "/";
+    const data = await fetch(pokeUrl);
+    const json = await data.json();
+    result.innerHTML = json.name;
+    console.log(json.name);
+  }
+  document.getElementById("up").addEventListener("click", scrollUp);
+
+  async function scrollDown(event) {
+    event.preventDefault();
+    pokeNum -= 1;
+    if (pokeNum < 1) {
+        pokeNum = 1;
+    }
+    const pokeUrl = baseUrl + (pokeNum) + "/";
+    const data = await fetch(pokeUrl);
+    const json = await data.json();
+    result.innerHTML = json.name;
+    console.log(json.name);
+  }
+  document.getElementById("down").addEventListener("click", scrollDown);
