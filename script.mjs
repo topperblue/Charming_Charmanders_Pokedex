@@ -23,6 +23,7 @@ const specialAttack = document.getElementById('specialattack');
 const hp = document.getElementById('HP');
 const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
+const typeBar = document.getElementById('tbar')
 const result = document.getElementById('result');
 const image = document.getElementById("pokeImage");
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
@@ -47,6 +48,7 @@ async function updateInfo(event, pokeUrl) {
   weight.innerHTML = json.weight +"kg";
   image.src = json.sprites.front_default;
   HP.innerHTML = json.baseStat
+  typeBar.value = json.types;
 
   console.log(json.name);
 }
@@ -75,7 +77,7 @@ async function searchPokeAPI(event) {
     console.log(json.name);
   } catch (err) {
     result.innerHTML = "DOES NOT EXIST";
-    userSearch.value = "NO TYPE";
+    typeBar.value = "NO TYPE";
     image.src = "HddtBOT.png";
     // add image in picture screen
   }
