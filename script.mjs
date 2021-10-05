@@ -42,6 +42,7 @@ async function updateInfo(event, pokeUrl) {
   height.innerHTML = json.height +"m";
   weight.innerHTML = json.weight +"kg";
   image.src = json.sprites.front_default;
+  HP.innerHTML = json.baseStat
 
   console.log(json.name);
 }
@@ -54,10 +55,24 @@ async function searchPokeAPI(event) {
   event.preventDefault();
   const pokeUrl = baseUrl + userSearch.value + "/";
   try {
-    updateInfo(event, pokeUrl)
+    fetch(pokeUrl)
+    const data = await fetch(pokeUrl);
+    const json = await data.json();
+  
+    pokeNum = json.id;
+    result.innerHTML = json.name;
+    number.innerText = json.id;
+    name.innerHTML = json.name;
+    height.innerHTML = json.height +"m";
+    weight.innerHTML = json.weight +"kg";
+    image.src = json.sprites.front_default;
+    HP.innerHTML = json.baseStat
+  
+    console.log(json.name);
   } catch (err) {
     result.innerHTML = "DOES NOT EXIST";
     userSearch.value = "NO TYPE";
+    image.src = "HddtBOT.png";
     // add image in picture screen
   }
   
@@ -73,7 +88,7 @@ async function scrollUp(event) {
     event.preventDefault();
     pokeNum += 1;
     if (pokeNum > 151) {
-        pokeNum = 151;
+        pokeNum = 1;
     }
     const pokeUrl = baseUrl + (pokeNum) + "/";
     updateInfo(event, pokeUrl);
@@ -84,7 +99,7 @@ async function scrollUp(event) {
     event.preventDefault();
     pokeNum -= 1;
     if (pokeNum < 1) {
-        pokeNum = 1;
+        pokeNum = 151;
     }
     const pokeUrl = baseUrl + (pokeNum) + "/";
     updateInfo(event, pokeUrl);
