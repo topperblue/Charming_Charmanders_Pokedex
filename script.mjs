@@ -19,6 +19,8 @@ const number = document.getElementById('number');
 const name = document.getElementById('name');
 const height = document.getElementById('height');
 const weight = document.getElementById('weight');
+const specialAttack = document.getElementById('specialattack');
+const hp = document.getElementById('HP');
 const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
 const result = document.getElementById('result');
@@ -35,10 +37,12 @@ async function updateInfo(event, pokeUrl) {
   const data = await fetch(pokeUrl);
   const json = await data.json();
 
-  pokeNum = json.id;
+  pokeNum = json.id
+  hp.innerHTML = json.stats[0].base_stat + "hp";
   result.innerHTML = json.name;
   number.innerText = json.id;
   name.innerHTML = json.name;
+  specialAttack.innerHTML = json.stats[3].base_stat + "special";
   height.innerHTML = json.height +"m";
   weight.innerHTML = json.weight +"kg";
   image.src = json.sprites.front_default;
@@ -91,3 +95,14 @@ async function scrollUp(event) {
   
   }
   document.getElementById("down").addEventListener("click", scrollDown);
+
+
+/***********************************
+INFO BUTTON
+***********************************/
+async function displayInfo(event) {
+  event.preventDefault();
+  const pokeUrl = baseUrl + (pokeNum) + "/";
+  updateInfo(event, pokeUrl);
+}
+document.getElementById("info").addEventListener("click", displayInfo);
