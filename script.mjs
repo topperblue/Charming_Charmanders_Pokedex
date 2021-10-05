@@ -27,6 +27,7 @@ const result = document.getElementById('result');
 const image = document.getElementById("pokeImage");
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let pokeNum = 0;
+let pokeUrl;
 
 
 /***********************************
@@ -37,26 +38,28 @@ async function updateInfo(event, pokeUrl) {
   const data = await fetch(pokeUrl);
   const json = await data.json();
 
-  pokeNum = json.id
-  hp.innerHTML = json.stats[0].base_stat + "hp";
+  pokeNum = json.id;
+  HP.innerHTML = "hp: " + json.stats[0].base_stat;
+  attack.innerHTML = "attack: " + json.stats[1].base_stat;
+  defense.innerHTML = "defense: " + json.stats[2].base_stat;
+  specialattack.innerHTML = "special attack: " + json.stats[3].base_stat;
+  specialdefense.innerHTML = "special defense: " + json.stats[4].base_stat;
+  speed.innerHTML = "speed: " + json.stats[5].base_stat;
   result.innerHTML = json.name;
-  number.innerText = json.id;
-  name.innerHTML = json.name;
-  specialAttack.innerHTML = json.stats[3].base_stat + "special";
-  height.innerHTML = json.height +"m";
-  weight.innerHTML = json.weight +"kg";
+  height.innerHTML = "height: " + json.height +"m";
+  weight.innerHTML = "weight: " + json.weight +"kg";
   image.src = json.sprites.front_default;
 
   console.log(json.name);
 }
-
+document.getElementById('info').addEventListener('click', updateInfo(pokeUrl));
 
 /***********************************
 SEARCH
 ***********************************/
 async function searchPokeAPI(event) {
   event.preventDefault();
-  const pokeUrl = baseUrl + userSearch.value + "/";
+  pokeUrl = baseUrl + userSearch.value + "/";
   try {
     updateInfo(event, pokeUrl)
   } catch (err) {
@@ -79,7 +82,7 @@ async function scrollUp(event) {
     if (pokeNum > 151) {
         pokeNum = 151;
     }
-    const pokeUrl = baseUrl + (pokeNum) + "/";
+    pokeUrl = baseUrl + (pokeNum) + "/";
     updateInfo(event, pokeUrl);
   }
   document.getElementById("up").addEventListener("click", scrollUp);
@@ -102,7 +105,7 @@ INFO BUTTON
 ***********************************/
 async function displayInfo(event) {
   event.preventDefault();
-  const pokeUrl = baseUrl + (pokeNum) + "/";
+  pokeUrl = baseUrl + (pokeNum) + "/";
   updateInfo(event, pokeUrl);
 }
 document.getElementById("info").addEventListener("click", displayInfo);
