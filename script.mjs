@@ -75,7 +75,7 @@ async function searchPokeAPI(event) {
     image.src = json.sprites.front_default;
     HP.innerHTML = json.baseStat
   
-    console.log(json.name);
+    console.log(json.name);  
   } catch (err) {
     result.innerHTML = "DOES NOT EXIST";
     typeBar.value = "NO TYPE";
@@ -161,23 +161,46 @@ async function displayMoves(event) {
   var child = document.getElementById("screen-list2");
   parent.replaceChild(movesList, child);
   movesList.classList.add('scroll');
+  movesList.id = "screen-list2";
 }
 
 
 document.getElementById("moves").addEventListener("click", displayMoves);
 
 
+function makeLocationUL(array) {
+  // Create the list element:
+  var list = document.createElement('ul');
+
+  for (var i = 0; i < array.length; i++) {
+      // Create the list item:
+      var item = document.createElement('li');
+
+      // Set its contents:
+      item.appendChild(document.createTextNode(array[i].location_area.name));
+
+      // Add it to the list:
+      list.appendChild(item);
+  }
+
+  // Finally, return the constructed list:
+  return list;
+}
+
 async function displayLocations(event) {
-  const pokeUrl = baseUrl + (pokeNum) + "/";
+  const pokeUrl = baseUrl + (pokeNum) + "/encounters";
   const data = await fetch(pokeUrl);
   const json = await data.json();
 
   event.preventDefault();
-  const locationArray = json.moves;
-  const movesList = makeUL(movesArray);
+  const locationArray = json;
+  const locationList = makeLocationUL(locationArray);
 
   var parent = document.getElementById("infoScreen")
   var child = document.getElementById("screen-list2");
-  parent.replaceChild(movesList, child);
-  movesList.classList.add('scroll');
+  parent.replaceChild(locationList, child);
+  locationList.classList.add('scroll');
+  locationList.id = "screen-list2";
 }
+
+document.getElementById("location").addEventListener("click", displayLocations);
