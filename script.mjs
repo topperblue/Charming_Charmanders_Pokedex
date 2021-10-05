@@ -48,6 +48,7 @@ async function updateInfo(event, pokeUrl) {
   image.src = json.sprites.front_default;
 
   console.log(json.name);
+  console.log(json.location_area_encounters);
 }
 
 
@@ -106,3 +107,60 @@ async function displayInfo(event) {
   updateInfo(event, pokeUrl);
 }
 document.getElementById("info").addEventListener("click", displayInfo);
+
+/***********************************
+MOVES BUTTON
+***********************************/
+function makeUL(array) {
+  // Create the list element:
+  var list = document.createElement('ul');
+
+  for (var i = 0; i < array.length; i++) {
+      // Create the list item:
+      var item = document.createElement('li');
+
+      // Set its contents:
+      item.appendChild(document.createTextNode(array[i].move.name));
+
+      // Add it to the list:
+      list.appendChild(item);
+  }
+
+  // Finally, return the constructed list:
+  return list;
+}
+
+
+async function displayMoves(event) {
+  const pokeUrl = baseUrl + (pokeNum) + "/";
+  const data = await fetch(pokeUrl);
+  const json = await data.json();
+
+  event.preventDefault();
+  const movesArray = json.moves;
+  const movesList = makeUL(movesArray);
+
+  var parent = document.getElementById("infoScreen")
+  var child = document.getElementById("screen-list2");
+  parent.replaceChild(movesList, child);
+  movesList.classList.add('scroll');
+}
+
+
+document.getElementById("moves").addEventListener("click", displayMoves);
+
+
+async function displayLocations(event) {
+  const pokeUrl = baseUrl + (pokeNum) + "/";
+  const data = await fetch(pokeUrl);
+  const json = await data.json();
+
+  event.preventDefault();
+  const locationArray = json.moves;
+  const movesList = makeUL(movesArray);
+
+  var parent = document.getElementById("infoScreen")
+  var child = document.getElementById("screen-list2");
+  parent.replaceChild(movesList, child);
+  movesList.classList.add('scroll');
+}
