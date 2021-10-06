@@ -1,3 +1,5 @@
+
+
 // import fetch from "node-fetch"
 
 
@@ -48,7 +50,12 @@ async function updateInfo(event, pokeUrl) {
   weight.innerHTML = json.weight +"kg";
   image.src = json.sprites.front_default;
   HP.innerHTML = json.baseStat
-  typeBar.value = json.types;
+  typeBar.value = json.types[0].type.name;
+  try {
+    typeBar.value += ", " + json.types[1].type.name;
+  } catch (e) {}
+
+  
 
   console.log(json.name);
   console.log(json.location_area_encounters);
@@ -74,8 +81,13 @@ async function searchPokeAPI(event) {
     weight.innerHTML = json.weight +"kg";
     image.src = json.sprites.front_default;
     HP.innerHTML = json.baseStat
-  
-    console.log(json.name);  
+    typeBar.value = json.types[0].type.name;
+    try {
+      typeBar.value += ", " + json.types[1].type.name;
+    } catch (e) {}
+
+    console.log(json.name);
+
   } catch (err) {
     result.innerHTML = "DOES NOT EXIST";
     typeBar.value = "NO TYPE";
