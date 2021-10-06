@@ -22,7 +22,7 @@ const name = document.getElementById('name');
 const height = document.getElementById('height');
 const weight = document.getElementById('weight');
 const specialAttack = document.getElementById('specialattack');
-const hp = document.getElementById('HP');
+const HP = document.getElementById('HP');
 const form = document.getElementById('form');
 const userSearch = document.getElementById('query');
 const typeBar = document.getElementById('tbar')
@@ -41,7 +41,7 @@ async function updateInfo(event, pokeUrl) {
   const json = await data.json();
 
   pokeNum = json.id
-  hp.innerHTML = json.stats[0].base_stat + "hp";
+  HP.innerHTML = json.stats[0].base_stat + "hp";
   result.innerHTML = json.name;
   number.innerText = json.id;
   name.innerHTML = json.name;
@@ -49,7 +49,6 @@ async function updateInfo(event, pokeUrl) {
   height.innerHTML = json.height +"m";
   weight.innerHTML = json.weight +"kg";
   image.src = json.sprites.front_default;
-  HP.innerHTML = json.baseStat
   typeBar.value = json.types[0].type.name;
   try {
     typeBar.value += ", " + json.types[1].type.name;
@@ -80,8 +79,8 @@ async function searchPokeAPI(event) {
     height.innerHTML = json.height +"m";
     weight.innerHTML = json.weight +"kg";
     image.src = json.sprites.front_default;
-    HP.innerHTML = json.baseStat
     typeBar.value = json.types[0].type.name;
+    HP.innerHTML = json.stats[0].base_stat + "hp";
     try {
       typeBar.value += ", " + json.types[1].type.name;
     } catch (e) {}
