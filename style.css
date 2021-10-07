@@ -5,3 +5,58 @@
     padding:5px;
 
 }
+.window {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFF5FC;
+}
+
+.container {
+    display:flex;
+    justify-content: center;
+    align-items:center
+}
+
+.imageInfo {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    font-family: Apercu;
+}
+
+
+#form {
+    padding: 6px 20px;
+    margin: 6px 0;
+    border-radius: 10px;
+}
+
+#screen-list2 {
+    background-color: #f5dadf;
+    padding: 2em;
+    font-family: Apercu;
+    font-size: 1.25em;
+}
+
+#pokeImage {
+    border: 5px solid #f5dadf;
+}
+
+.info-buttons {
+    padding: 2em;
+}
+.buttonStyle {
+    background-color: #8e9ffa;
+    color: white;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: Apercu;
+}
