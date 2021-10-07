@@ -40,19 +40,9 @@ UPDATING ALL INFO FUNCTION
 async function updateInfo(event, pokeUrl) {
   const data = await fetch(pokeUrl);
   const json = await data.json();
-
   pokeNum = json.id;
-  HP.innerHTML = "hp: " + json.stats[0].base_stat;
-  attack.innerHTML = "attack: " + json.stats[1].base_stat;
-  defense.innerHTML = "defense: " + json.stats[2].base_stat;
-  specialattack.innerHTML = "special attack: " + json.stats[3].base_stat;
-  specialdefense.innerHTML = "special defense: " + json.stats[4].base_stat;
-  speed.innerHTML = "speed: " + json.stats[5].base_stat;
-  result.innerHTML = json.name;
-  height.innerHTML = "height: " + json.height +"m";
-  weight.innerHTML = "weight: " + json.weight +"kg";
-  image.src = json.sprites.front_default;
-  typeBar.value = json.types[0].type.name;
+
+  displayInfo(event, pokeUrl);
   try {
     typeBar.value += ", " + json.types[1].type.name;
   } catch (e) {}
@@ -62,7 +52,6 @@ async function updateInfo(event, pokeUrl) {
   console.log(json.name);
   console.log(json.location_area_encounters);
 }
-document.getElementById('info').addEventListener('click', updateInfo(pokeUrl));
 
 /***********************************
 SEARCH
@@ -74,16 +63,9 @@ async function searchPokeAPI(event) {
     fetch(pokeUrl)
     const data = await fetch(pokeUrl);
     const json = await data.json();
-  
     pokeNum = json.id;
-    result.innerHTML = json.name;
-    number.innerText = json.id;
-    name.innerHTML = json.name;
-    height.innerHTML = json.height +"m";
-    weight.innerHTML = json.weight +"kg";
-    image.src = json.sprites.front_default;
-    typeBar.value = json.types[0].type.name;
-    HP.innerHTML = json.stats[0].base_stat + "hp";
+  
+    displayInfo(event, pokeUrl);
     try {
       typeBar.value += ", " + json.types[1].type.name;
     } catch (e) {}
@@ -99,6 +81,7 @@ async function searchPokeAPI(event) {
   
 }
 form.addEventListener('submit', searchPokeAPI);
+
 
 
 
@@ -133,11 +116,56 @@ async function scrollUp(event) {
 INFO BUTTON
 ***********************************/
 async function displayInfo(event) {
-  event.preventDefault();
   pokeUrl = baseUrl + (pokeNum) + "/";
-  updateInfo(event, pokeUrl);
+  event.preventDefault();
+  const data = await fetch(pokeUrl);
+  const json = await data.json();
+  console.log(json.stats[0]);
+  pokeNum = json.id;
+  let stat = new Array(8);
+
+
+  stat[0] = "height: " + json.height +"m";
+  stat[1] = "weight: " + json.weight +"kg";
+  stat[2] = "hp: " + json.stats[0].base_stat;
+  stat[3] = "attack: " + json.stats[1].base_stat;
+  stat[4] = "defense: " + json.stats[2].base_stat;
+  stat[5] = "special attack: " + json.stats[3].base_stat;
+  stat[6] = "special defense: " + json.stats[4].base_stat;
+  stat[7] = "speed: " + json.stats[5].base_stat;
+
+  let statsList = makeInfoUL(stat);
+
+  var parent = document.getElementById("infoScreen")
+  var child = document.getElementById("screen-list2");
+  parent.replaceChild(statsList, child);
+  statsList.classList.add('scroll');
+  statsList.id = "screen-list2";
+
+  result.innerHTML = json.name;
+  image.src = json.sprites.front_default;
+  typeBar.value = json.types[0].type.name;
 }
 document.getElementById("info").addEventListener("click", displayInfo);
+
+function makeInfoUL(array) {
+  // Create the list element:
+  var list = document.createElement('ul');
+
+  for (var i = 0; i < array.length; i++) {
+      // Create the list item:
+      var item = document.createElement('li');
+
+      // Set its contents:
+      item.appendChild(document.createTextNode(array[i]));
+
+      // Add it to the list:
+      list.appendChild(item);
+  }
+
+  // Finally, return the constructed list:
+  return list;
+}
 
 /***********************************
 MOVES BUTTON
