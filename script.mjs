@@ -44,9 +44,7 @@ async function updateInfo(event, pokeUrl) {
   pokeNum = json.id;
 
   displayInfo(event, pokeUrl);
-  try {
-    typeBar.value += ", " + json.types[1].type.name;
-  } catch (e) {}
+  
 
   
 
@@ -146,6 +144,9 @@ async function displayInfo(event) {
   result.innerHTML = json.name;
   image.src = json.sprites.front_default;
   typeBar.value = json.types[0].type.name;
+  try {
+    typeBar.value += ", " + json.types[1].type.name;
+  } catch (e) {}
 }
 document.getElementById("info").addEventListener("click", displayInfo);
 
