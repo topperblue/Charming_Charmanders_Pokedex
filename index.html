@@ -11,27 +11,30 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class = "window">
     <h1 id = "result">Charming Charmander Pokedex</h1>
+  <div class="container">
+    <div class = "imageInfo">
+    <img id = "pokeImage" src = "pokemon-logo-png-1444.png" width="375" height="375">
     <ol id="pokedex"></ol>
     <div id = "infoScreen" >
     <ul id="screen-list2" class = "scroll">
-        <li><h2 id="number">-</h2></li>
-        <li><h2 id="name">-</h2></li>
-        <li><h2 id="height">-</h2></li>
-        <li><h2 id="weight">-</h2></li>
-        <li><h2 id="HP">-</h2></li>
-        <li><h2 id="attack">-</h2></li>
-        <li><h2 id="defense">-</h2></li>
-        <li><h2 id="specialattack">-</h2></li>
-        <li><h2 id="specialdefense">-</h2></li>
-        <li><h2 id="speed">-</h2></li>
-    </div>
-  </ul>
+        <li><p id="number">-</p></li>
+        <li><p id="name">-</p></li>
+        <li><p id="height">-</p></li>
+        <li><p id="weight">-</p></li>
+        <li><p id="HP">-</p></li>
+        <li><p id="attack">-</p></li>
+        <li><p id="defense">-</p></li>
+        <li><p id="specialattack">-</p></li>
+        <li><p id="specialdefense">-</p></li>
+        <li><p id="speed">-</p></li>
+    </ul>
+  </div>
+</div>
   
   </div>
 
-  <img id = "pokeImage" src = "data:," width="500" height="500"> 
 
   <form id = "form" role = "search">
     <input type = "search" id = "query" name = "q" placeholder = "Search...">
@@ -48,16 +51,16 @@
   </div>
   <script src="script.mjs" type="module"></script>
 
-  <div class="info-butons">
-    <button id="info">INFO</button>
-    <button id="moves">MOVES</button>
-    <button id="location">LOCATION</button>
-    <button id="evolution">EVOLUTION</button>
+  <div class="info-buttons">
+    <button id="info" class="buttonStyle">INFO</button>
+    <button id="moves" class="buttonStyle" >MOVES</button>
+    <button id="location" class="buttonStyle" >LOCATION</button>
+    <button id="evolution" class="buttonStyle">EVOLUTION</button>
   </div>
   <script src="script.mjs" type="module"></script>
 
 
-
+</div>
 
 </body>
 

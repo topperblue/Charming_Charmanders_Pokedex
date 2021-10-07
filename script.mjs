@@ -28,6 +28,7 @@ const userSearch = document.getElementById('query');
 const typeBar = document.getElementById('tbar')
 const result = document.getElementById('result');
 const image = document.getElementById("pokeImage");
+const infoList = document.getElementById("screen-list2")
 var baseUrl = "https://pokeapi.co/api/v2/pokemon/"
 let pokeNum = 0;
 
