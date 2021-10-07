@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap");
+
 .scroll {
     width:300px;
     height:300px;
@@ -27,7 +30,8 @@
 
 h1 {
     text-align: center;
-    font-family: Apercu;
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
 }
 
 
@@ -40,8 +44,9 @@ h1 {
 #screen-list2 {
     background-color: #f5dadf;
     padding: 2em;
-    font-family: Apercu;
-    font-size: 1.25em;
+    font-family: 'Karla', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
 }
 
 #pokeImage {
@@ -57,6 +62,6 @@ h1 {
     padding: 1em 2em;
     border: none;
     border-radius: 8px;
-    font-weight: bold;
-    font-family: Apercu;
+    font-weight: 700;
+    font-family: 'Karla', sans-serif;
 }
