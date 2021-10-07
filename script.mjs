@@ -179,7 +179,7 @@ function makeUL(array) {
       var item = document.createElement('li');
 
       // Set its contents:
-      item.appendChild(document.createTextNode(array[i].move.name));
+      item.appendChild(document.createTextNode(array[i].move.name.replaceAll('-',' ')));
 
       // Add it to the list:
       list.appendChild(item);
@@ -219,7 +219,7 @@ function makeLocationUL(array) {
       var item = document.createElement('li');
 
       // Set its contents:
-      item.appendChild(document.createTextNode(array[i].location_area.name));
+      item.appendChild(document.createTextNode(array[i].location_area.name.replaceAll('-',' ')));
 
       // Add it to the list:
       list.appendChild(item);
