@@ -240,11 +240,30 @@ async function displayLocations(event) {
   const locationArray = json;
   const locationList = makeLocationUL(locationArray);
 
-  var parent = document.getElementById("infoScreen")
-  var child = document.getElementById("screen-list2");
-  parent.replaceChild(locationList, child);
-  locationList.classList.add('scroll');
-  locationList.id = "screen-list2";
+  if (locationArray.length == 0) {
+    var unfoundList = document.createElement('ul');
+    var item = document.createElement('li');
+
+    // Set its contents:
+    item.appendChild(document.createTextNode("can't be found in the wild"));
+
+    // Add it to the list:
+    unfoundList.appendChild(item);
+    var parent = document.getElementById("infoScreen")
+    var child = document.getElementById("screen-list2");
+    parent.replaceChild(unfoundList, child);
+    unfoundList.classList.add('scroll');
+    unfoundList.id = "screen-list2";
+    
+  }
+
+  else {
+    var parent = document.getElementById("infoScreen")
+    var child = document.getElementById("screen-list2");
+    parent.replaceChild(locationList, child);
+    locationList.classList.add('scroll');
+    locationList.id = "screen-list2";
+  }
 }
 
 document.getElementById("location").addEventListener("click", displayLocations);
