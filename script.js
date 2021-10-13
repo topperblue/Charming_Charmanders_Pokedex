@@ -57,7 +57,7 @@ SEARCH
 ***********************************/
 async function searchPokeAPI(event) {
   event.preventDefault();
-  pokeUrl = baseUrl + userSearch.value.toLowerCase() + "/";
+  pokeUrl = baseUrl + userSearch.value + "/";
   try {
     fetch(pokeUrl)
     const data = await fetch(pokeUrl);
