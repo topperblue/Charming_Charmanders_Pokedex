@@ -2,7 +2,7 @@
 {
   "install": "node_modules",
   "scripts": {
-    "start": "script.mjs"
+    "start": "index.html"
   },
   "requires": true,
   "lockfileVersion": 1,
