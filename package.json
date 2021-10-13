@@ -1,6 +1,7 @@
 
 {
   "scripts": {
+    "install": "node_modules",
     "start": "script.mjs"
   },
   "requires": true,
